@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: UNLICENSED
-pragma solidity: ^0.8.17;
+pragma solidity ^0.8.17;
 
 import "./FarmNft.sol";
 import "hardhat/console.sol";
@@ -40,7 +40,10 @@ contract AssetTokenization {
     ) public {
         address farmerAddress = msg.sender;
 
-        require(availableContract(farmerAddress) == false, "Your token is already deployed");
+        require(
+            availableContract(farmerAddress) == false,
+            "Your token is already deployed"
+        );
 
         addFarmer(farmerAddress);
 
@@ -56,44 +59,43 @@ contract AssetTokenization {
         farmerToNftContract[farmerAddress] = newNft;
     }
 
-    function getNftContractDetails(address farmerAddress)
-        public
-        view
-        returns (nftContractDetails memory) {
-            require(availableContract(farmerAddress), "not available");
+    function getNftContractDetails(
+        address farmerAddress
+    ) public view returns (nftContractDetails memory) {
+        require(availableContract(farmerAddress), "not available");
 
-            nftContractDetails memory details;
-            details = nftContractDetails(
-                farmerToNftContract[farmerAddress].farmerAddress(),
-                farmerToNftContract[farmerAddress].farmerName(),
-                farmerToNftContract[farmerAddress].description(),
-                farmerToNftContract[farmerAddress].totalMint(),
-                farmerToNftContract[farmerAddress].availableMint(),
-                farmerToNftContract[farmerAddress].price(),
-                farmerToNftContract[farmerAddress].expirationDate(),
-            );
+        nftContractDetails memory details;
+        details = nftContractDetails(
+            farmerToNftContract[farmerAddress].farmerAddress(),
+            farmerToNftContract[farmerAddress].farmerName(),
+            farmerToNftContract[farmerAddress].description(),
+            farmerToNftContract[farmerAddress].totalMint(),
+            farmerToNftContract[farmerAddress].availableMint(),
+            farmerToNftContract[farmerAddress].price(),
+            farmerToNftContract[farmerAddress].expirationDate()
+        );
 
-            return details;
-        }
+        return details;
+    }
 
-        function buyNft(address farmerAddress) public payable {
-            require(availableContract(farmerAddress), "Not yet deployed");
+    function buyNft(address farmerAddress) public payable {
+        require(availableContract(farmerAddress), "Not yet deployed");
 
-            address buyerAddress = msg.sender;
-            farmerToNftContract[farmerAddress].mintNFT{ value : msg.value }(
-                buyerAddress
-            );
-        }
+        address buyerAddress = msg.sender;
+        farmerToNftContract[farmerAddress].mintNFT{value: msg.value}(
+            buyerAddress
+        );
+    }
 
-        function getBuyers() public view returns (address[] memory) {
-            address farmerAddress = msg.sender;
+    function getBuyers() public view returns (address[] memory) {
+        address farmerAddress = msg.sender;
 
-            require(availableContract(farmerAddress), "Not yet deployed");
+        require(availableContract(farmerAddress), "Not yet deployed");
 
-            return farmerToNftContract[farmerAddress].getTokenOwners();
-        }
+        return farmerToNftContract[farmerAddress].getTokenOwners();
+    }
 
-        function getFarmers() public view returns (address[] memory) {
-            return farmers;
-        }
+    function getFarmers() public view returns (address[] memory) {
+        return farmers;
+    }
 }
