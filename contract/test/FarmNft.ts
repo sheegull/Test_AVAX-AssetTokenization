@@ -53,7 +53,7 @@ describe("farmNft", function () {
 
             await expect(
                 farmNft.connect(buyer).mintNFT(buyer.address, { value: price } as Overrides)
-            ).to.changeEtherBalance([farmer, buyer], [price, -price]);
+            ).to.changeEtherBalances([farmer, buyer], [price, -price]);
         });
 
         it("revert when not enough nft to mint", async function () {
