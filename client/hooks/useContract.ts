@@ -4,7 +4,7 @@ import AssetTokenizationArtifact from "../artifacts/AssetTokenization.json";
 import { AssetTokenization as AssetTokenizationType } from "../types";
 import { getEthereum } from "../utils/ethereum";
 
-export const AssetTokenizationAddress = "コントラクトのアドレス";
+export const AssetTokenizationAddress = "0xDF1d4d455152EE53262BDcf6258D5268794374D4";
 
 type PropsUseContract = {
     currentAccount: string | undefined;
