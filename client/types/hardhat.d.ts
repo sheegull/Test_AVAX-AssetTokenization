@@ -13,6 +13,18 @@ import * as Contracts from ".";
 declare module "hardhat/types/runtime" {
   interface HardhatEthersHelpers extends HardhatEthersHelpersBase {
     getContractFactory(
+      name: "AutomationBase",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.AutomationBase__factory>;
+    getContractFactory(
+      name: "AutomationCompatible",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.AutomationCompatible__factory>;
+    getContractFactory(
+      name: "AutomationCompatibleInterface",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.AutomationCompatibleInterface__factory>;
+    getContractFactory(
       name: "ERC721",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.ERC721__factory>;
@@ -45,6 +57,21 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.FarmNft__factory>;
 
+    getContractAt(
+      name: "AutomationBase",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.AutomationBase>;
+    getContractAt(
+      name: "AutomationCompatible",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.AutomationCompatible>;
+    getContractAt(
+      name: "AutomationCompatibleInterface",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.AutomationCompatibleInterface>;
     getContractAt(
       name: "ERC721",
       address: string,
