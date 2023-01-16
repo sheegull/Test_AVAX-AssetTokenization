@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import { getEthereum } from "../utils/ethereum";
 
 type ReturnUseWallet = {
-    current: string | undefined;
+    currentAccount: string | undefined;
     connectWallet: () => void;
 };
 
